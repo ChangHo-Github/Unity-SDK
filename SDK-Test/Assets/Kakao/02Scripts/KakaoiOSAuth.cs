@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System.Runtime.InteropServices;
+using AOT;
 
-public class KakaoiOSAuth : MonoBehaviour
+public class FrameworkBridge : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+#if UNITY_IOS
+    public static void SendLoginKakaoIOS()
     {
-        
+        Debug.Log("@kakao - login bridge function called");
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            _sendKakaoLogin();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [DllImport("__Internal")]
+    static extern void _sendKakaoLogin();
+
+#endif
 }

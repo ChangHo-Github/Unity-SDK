@@ -9,8 +9,8 @@ using System.Linq;
 
 public static class KakaoPostprocess
 {
-    const string KAKAO_APP_KEY = "your-own-kakao-app-key";
-    const string KAKAO_URL_SCHEME = "kakao" + KAKAO_APP_KEY;
+    const string KAKAO_APP_KEY = "707868";
+    const string KAKAO_URL_SCHEME = "kakao048d87d3daf4310af05f2932769ca807";
 
     static string ProjectPath = string.Empty;
     static string PbxProjectPath = string.Empty;
@@ -89,7 +89,11 @@ public static class KakaoPostprocess
     static void AddLinkerFlag(PBXProject project)
     {
         project.ReadFromString(File.ReadAllText(PbxProjectPath));
-        string buildTarget = project.TargetGuidByName("Unity-iPhone");
+#if UNITY_2019_3_OR_NEWER
+        string buildTarget = project.GetUnityFrameworkTargetGuid();
+#else
+        string buildTarget = project.TargetGuidByName(PBXProject.GetUnityTargetName());
+#endif
         project.AddBuildProperty(buildTarget, "OTHER_LDFLAGS", "-all_load");
     }
 
