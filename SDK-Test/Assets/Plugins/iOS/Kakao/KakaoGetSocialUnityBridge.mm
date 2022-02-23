@@ -1,7 +1,7 @@
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 extern "C" {
-    void _sendKakaoLogin()
+    void _KakaoSignIn()
     {
         // Close old session
         if ( ! [[KOSession sharedSession] isOpen] ) {
@@ -20,13 +20,22 @@ extern "C" {
             }
             
             // get user info
-            [KOSessionTask userMeTaskWithCompletion:^(NSError * _Nullable error, KOUserMe * _Nullable me) {
+            [KOSessionTask userMeTaskWithCompletion:^(NSError *error, KOUserMe *me) {
                 if (error){
                     NSLog(@"get user info failed. - error: %@", error);
                 } else {
                     NSLog(@"get user info. - user info: %@", me);
+                    
+                    if(me.ID != nil)
+                    {
+                        UnitySendMessage("GameManager", "KakaoID", [me.ID UTF8String]);
+                    }
                 }
             }];
         }];
+    }
+
+    void _KakaoSignOut{
+        
     }
 }

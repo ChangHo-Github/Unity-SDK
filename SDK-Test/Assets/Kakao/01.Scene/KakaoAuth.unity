@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1895040421}
         m_TargetAssemblyTypeName: KakaoAuth, Assembly-CSharp
         m_MethodName: KakaoUnlink
         m_Mode: 1
@@ -777,10 +777,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: KakaoAuth, Assembly-CSharp
-        m_MethodName: InformationClear
-        m_Mode: 1
+      - m_Target: {fileID: 1720343880}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1170,9 +1170,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895040419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519eb6b49a2a534499d3d16884133e42, type: 3}
+  m_Script: {fileID: 11500000, guid: c38cb07075c559f46b18e8ea06f5b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: {fileID: 1720343880}
 --- !u!1 &2000815555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1895040421}
         m_TargetAssemblyTypeName: KakaoAuth, Assembly-CSharp
         m_MethodName: KakaoSignOut
         m_Mode: 1
@@ -1390,8 +1391,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1895040421}
-        m_TargetAssemblyTypeName: KakaoiOSAuth, Assembly-CSharp
-        m_MethodName: SendLoginKakaoIOS
+        m_TargetAssemblyTypeName: KakaoAuth, Assembly-CSharp
+        m_MethodName: KakaoSignIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

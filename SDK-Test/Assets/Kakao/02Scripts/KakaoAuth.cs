@@ -1,23 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KakaoAndroidAuth : MonoBehaviour
+public class KakaoAuth : MonoBehaviour
 {
     [SerializeField]
     private Text infoText;
 
-    public void InformationClear()
-    {
-        infoText.text = "";
-    }
+    [DllImport("__Internal")]
+    static extern void _kakaoSignIn();
 
     public void KakaoSignIn()
     {
         infoText.text += "KakaoSignIn\n";
+#if UNITY_ANDROID
         AndroidJavaObject plugin = new AndroidJavaObject("com.unity3d.player.KakaoAuth");
         plugin.Call("KakaoSignIn");
+#elif UNITY_IOS
+        _kakaoSignIn();
+#endif
     }
 
     public void KakaoSignOut()
