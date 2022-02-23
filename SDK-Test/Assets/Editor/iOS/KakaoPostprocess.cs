@@ -9,8 +9,8 @@ using System.Linq;
 
 public static class KakaoPostprocess
 {
-    const string KAKAO_APP_KEY = "707868";
-    const string KAKAO_URL_SCHEME = "kakao048d87d3daf4310af05f2932769ca807";
+    const string KAKAO_APP_KEY = "048d87d3daf4310af05f2932769ca807";
+    const string KAKAO_URL_SCHEME = "kakao" + KAKAO_APP_KEY;
 
     static string ProjectPath = string.Empty;
     static string PbxProjectPath = string.Empty;
