@@ -3,10 +3,10 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using AOT;
 
-public class FrameworkBridge : MonoBehaviour
+public class KakaoiOSAuth : MonoBehaviour
 {
 #if UNITY_IOS
-    public static void SendLoginKakaoIOS()
+    public void SendLoginKakaoIOS()
     {
         Debug.Log("@kakao - login bridge function called");
         if (Application.platform == RuntimePlatform.IPhonePlayer)
