@@ -39,9 +39,9 @@ public class KakaoAuth : MonoBehaviour
     }
 
     /* 
-     * [ »ç¿ë ÁÖÀÇ ]
-     * Ä«Ä«¿À °èÁ¤¿¬°áÀ» ÇØÁ¦ÇÏ±â À§ÇØ¼­´Â ·Î±×ÀÎÀÌ µÇ¾îÀÖ¾î¾ßÇÑ´Ù.
-     * ·Î±×ÀÎ ÈÄ -> °èÁ¤¿¬°á ÇØÁ¦ÇÏµµ·Ï ÇÏÀÚ
+     * [ ì‚¬ìš© ì£¼ì˜ ]
+     * ì¹´ì¹´ì˜¤ ê³„ì •ì—°ê²°ì„ í•´ì œí•˜ê¸° ìœ„í•´ì„œëŠ” ë¡œê·¸ì¸ì´ ë˜ì–´ìˆì–´ì•¼í•œë‹¤.
+     * ë¡œê·¸ì¸ í›„ -> ê³„ì •ì—°ê²° í•´ì œí•˜ë„ë¡ í•˜ì
      */
     public void KakaoUnlink()
     {
@@ -89,16 +89,16 @@ public class KakaoAuth : MonoBehaviour
         switch(call)
         {
             case "signin":
-                infoText.text += "·Î±×ÀÎ ¼º°ø\n";
+                infoText.text += "ë¡œê·¸ì¸ ì„±ê³µ\n";
                 break;
             case "signout":
-                infoText.text += "·Î±×¾Æ¿ô ¼º°ø\n";
+                infoText.text += "ë¡œê·¸ì•„ì›ƒ ì„±ê³µ\n";
                 break;
             case "unlink":
-                infoText.text += "°èÁ¤¿¬°áÇØÁ¦ ¼º°ø\n";
+                infoText.text += "ê³„ì •ì—°ê²°í•´ì œ ì„±ê³µ\n";
                 break;
             default:
-                infoText.text += "¾Ë¼ö¾ø´Â ÀÌº¥Æ®ÀÔ´Ï´Ù.\n";
+                infoText.text += "ì•Œìˆ˜ì—†ëŠ” ì´ë²¤íŠ¸ì…ë‹ˆë‹¤.\n";
                 break;
         }
     }
@@ -108,16 +108,16 @@ public class KakaoAuth : MonoBehaviour
         switch(call)
         {
             case "signin":
-                infoText.text += "·Î±×ÀÎ ¿¡·¯ ¹ß»ı\n";
+                infoText.text += "ë¡œê·¸ì¸ ì—ëŸ¬ ë°œìƒ\n";
                 break;
             case "signout":
-                infoText.text += "·Î±×¾Æ¿ô ¿¡·¯ ¹ß»ı\n";
+                infoText.text += "ë¡œê·¸ì•„ì›ƒ ì—ëŸ¬ ë°œìƒ\n";
                 break;
             case "unlink":
-                infoText.text += "°èÁ¤¿¬°á ÇØÁ¦ ¿¡·¯ ¹ß»ı\n";
+                infoText.text += "ê³„ì •ì—°ê²° í•´ì œ ì—ëŸ¬ ë°œìƒ\n";
                 break;
             case "userinfo":
-                infoText.text += "»ç¿ëÀÚ Á¤º¸ ºÒ·¯¿À±â ¿¡·¯ ¹ß»ı\n";
+                infoText.text += "ì‚¬ìš©ì ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸° ì—ëŸ¬ ë°œìƒ\n";
                 break;
         }
     }
