@@ -9,7 +9,7 @@ class KakaoAuth {
     fun KakaoSignIn() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "signin")
+                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "signin fail")
             } else if (token != null) {
                 UnityPlayer.UnitySendMessage("GameManager", "KakaoToken", "${token.accessToken}")
                 KakaoUserInfo()
@@ -33,9 +33,9 @@ class KakaoAuth {
     fun KakaoSignOut() {
         UserApiClient.instance.logout { error ->
             if (error != null) {
-                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "signout")
+                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "signout fail")
             } else {
-                UnityPlayer.UnitySendMessage("GameManager", "KakaoEvent", "signout")
+                UnityPlayer.UnitySendMessage("GameManager", "KakaoEvent", "signout Success")
             }
         }
     }
@@ -43,9 +43,9 @@ class KakaoAuth {
     fun KakaoUnlink() {
         UserApiClient.instance.unlink { error ->
             if (error != null) {
-               UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "unlink") 
+               UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "unlink fail") 
             } else {
-               UnityPlayer.UnitySendMessage("GameManager", "KakaoEvent", "unlink") 
+               UnityPlayer.UnitySendMessage("GameManager", "KakaoEvent", "unlink Success") 
             }
         }
     }
@@ -54,7 +54,7 @@ class KakaoAuth {
     fun KakaoUserInfo(){
         UserApiClient.instance.me { user, error ->
             if (error != null) {
-                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "userinfo")
+                UnityPlayer.UnitySendMessage("GameManager", "KakaoError", "userinfo load fail")
             }
             else if (user != null) {				
                 UnityPlayer.UnitySendMessage("GameManager", "KakaoID", "${user.id}")
