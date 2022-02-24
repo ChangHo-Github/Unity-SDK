@@ -14,28 +14,85 @@ extern "C" {
         [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
             if (error) {
                 NSLog(@"login failed. - error: %@", error);
+                UnitySendMessage("GameManager", "KakaoError", "signin");
             }
             else {
                 NSLog(@"login succeeded.");
+                UnitySendMessage("GameManager", "KakaoEvent", "signin");
             }
             
+
+            [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
+                if (error) {
+                    switch (error.code) {
+                        case KOErrorDeactivatedSession:
+                            NSLog(@"세션이 만료된(access_token, refresh_token이 모두 만료된 경우) 상태");
+                            break;
+                        default:
+                            NSLog(@"예기치 못한 에러. 서버 에러");
+                            break;
+                    }
+                } else {
+                    // 성공 (토큰이 유효함)
+                    NSLog(@"success request - access token info:  %@", accessTokenInfo);
+                    UnitySendMessage("GameManager", "KakaoToken", accessTokenInfo);
+                }
+             }];
+
             // get user info
             [KOSessionTask userMeTaskWithCompletion:^(NSError *error, KOUserMe *me) {
                 if (error){
                     NSLog(@"get user info failed. - error: %@", error);
+                    UnitySendMessage("GameManager", "KakaoError", "userinfo");
                 } else {
                     NSLog(@"get user info. - user info: %@", me);
                     
-                    if(me.ID != nil)
-                    {
+                    if(me.ID != nil){
                         UnitySendMessage("GameManager", "KakaoID", [me.ID UTF8String]);
+                    }
+
+                    if(me.account.profile.nickname != nil){
+                        UnitySendMessage("GameManager", "KakaoName", [me.account.profile.nickname UTF8String]);
+                    }
+
+                    if(me.account.email != nil){
+                        UnitySendMessage("GameManager", "KakaoEmail", [me.account.email UTF8String]);
+                    }
+
+                    if(me.account.profile.profileImageURL != nil){
+                        UnitySendMessage("GameManager", "KakaoProfileURL", [me.account.profile.profileImageURL.absoluteString UTF8String]);
                     }
                 }
             }];
         }];
     }
 
-    void _KakaoSignOut{
-        
+    void _KakaoSignOut()
+    {
+        [[KOSession sharedSession] logoutAndCloseWithCompletionHandler:^(BOOL success, NSError *error){
+            if (error){
+                NSLog(@"failed to logout. - error: %@", error);
+                UnitySendMessage("GameManager", "KakaoError", "signout");
+            }
+            else
+            {
+                NSLog(@"logout success")
+                UnitySendMessage("GameManager", "KakaoEvent", "signout");
+            }
+        }];
+    }
+
+    void _KakaoUnlink()
+    {
+        [KOSessionTask unlinkTaskWithCompletionHandler:^(BOOL success, NSError *error) {
+            if(error){
+                NSLog(@"unlink logout. - error: %@", error);
+                UnitySendMessage("GameManager", "KakaoError", "unlink");
+            }
+            else {
+                NSLog(@"unlink succeeded.");
+                UnitySendMessage("GameManager", "KakaoEvent", "unlink");
+            }
+        }];
     }
 }

@@ -60,7 +60,7 @@ class KakaoAuth {
                 UnityPlayer.UnitySendMessage("GameManager", "KakaoID", "${user.id}")
                 UnityPlayer.UnitySendMessage("GameManager", "KakaoName", "${user.kakaoAccount?.profile?.nickname}")
 				UnityPlayer.UnitySendMessage("GameManager", "KakaoEmail", "${user.kakaoAccount?.email}")
-                UnityPlayer.UnitySendMessage("GameManager", "KakaoProfileImage", "${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                UnityPlayer.UnitySendMessage("GameManager", "KakaoProfileURL", "${user.kakaoAccount?.profile?.thumbnailImageUrl}")
 				UnityPlayer.UnitySendMessage("GameManager", "KakaoPhoneNumber", "${user.kakaoAccount?.phoneNumber}")
             }
         }
