@@ -1,6 +1,23 @@
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 extern "C" {
+    void _KakaoSimpleSignIn()
+    {
+        [[KOSession sharedSession] close];
+
+            [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
+                
+                if (error) {
+                    NSLog(@"login failed. - error: %@", error);
+                }
+                else {
+                    NSLog(@"login succeeded.");
+                    UnitySendMessage("iOSPluginCallBacks", [callback UTF8String], "");
+                }
+
+            }authType:(KOAuthType)KOAuthTypeTalk, nil];
+        }
+
     void _KakaoSignIn()
     {
         // Close old session
