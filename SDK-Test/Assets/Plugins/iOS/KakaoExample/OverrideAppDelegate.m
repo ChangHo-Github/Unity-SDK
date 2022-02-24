@@ -1,15 +1,15 @@
-#import "UnityAppController.h"
+// #import "UnityAppController.h"
 
-@interface OverrideAppDelegate : UnityAppController
-@end
+// @interface OverrideAppDelegate : UnityAppController
+// @end
 
-IMPL_APP_CONTROLLER_SUBCLASS(OverrideAppDelegate)
+// IMPL_APP_CONTROLLER_SUBCLASS(OverrideAppDelegate)
 
-@implementation OverrideAppDelegate
+// @implementation OverrideAppDelegate
 
--(BOOL)application:(UIApplication*) application didFinishLaunchingWithOptions:(NSDictionary*) options
-{
-    NSLog(@"[OverrideAppDelegate application:%@ didFinishLaunchingWithOptions:%@]", application, options);
-    return [super application:application didFinishLaunchingWithOptions:options];
-}
-@end
+// -(BOOL)application:(UIApplication*) application didFinishLaunchingWithOptions:(NSDictionary*) options
+// {
+//     NSLog(@"[OverrideAppDelegate application:%@ didFinishLaunchingWithOptions:%@]", application, options);
+//     return [super application:application didFinishLaunchingWithOptions:options];
+// }
+// @end
