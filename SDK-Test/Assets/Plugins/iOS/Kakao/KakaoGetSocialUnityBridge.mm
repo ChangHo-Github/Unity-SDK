@@ -14,36 +14,19 @@ extern "C" {
         [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
             if (error) {
                 NSLog(@"login failed. - error: %@", error);
-                UnitySendMessage("GameManager", "KakaoError", "signin");
+                UnitySendMessage("GameManager", "KakaoError", "kakao sdk open fail");
             }
             else {
                 NSLog(@"login succeeded.");
-                UnitySendMessage("GameManager", "KakaoEvent", "signin");
+                UnitySendMessage("GameManager", "KakaoEvent", "kakao signin success");
             }
             
-
-            [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
-                if (error) {
-                    switch (error.code) {
-                        case KOErrorDeactivatedSession:
-                            NSLog(@"세션이 만료된(access_token, refresh_token이 모두 만료된 경우) 상태");
-                            break;
-                        default:
-                            NSLog(@"예기치 못한 에러. 서버 에러");
-                            break;
-                    }
-                } else {
-                    // 성공 (토큰이 유효함)
-                    NSLog(@"success request - access token info:  %@", accessTokenInfo);
-                    UnitySendMessage("GameManager", "KakaoToken", "\(accessTokenInfo)");
-                }
-             }];
 
             // get user info
             [KOSessionTask userMeTaskWithCompletion:^(NSError *error, KOUserMe *me) {
                 if (error){
                     NSLog(@"get user info failed. - error: %@", error);
-                    UnitySendMessage("GameManager", "KakaoError", "userinfo");
+                    UnitySendMessage("GameManager", "KakaoError", "user date load fail");
                 } else {
                     NSLog(@"get user info. - user info: %@", me);
                     
@@ -72,12 +55,12 @@ extern "C" {
         [[KOSession sharedSession] logoutAndCloseWithCompletionHandler:^(BOOL success, NSError *error){
             if (error){
                 NSLog(@"failed to logout. - error: %@", error);
-                UnitySendMessage("GameManager", "KakaoError", "signout");
+                UnitySendMessage("GameManager", "KakaoError", "signout fail");
             }
             else
             {
                 NSLog(@"logout success");
-                UnitySendMessage("GameManager", "KakaoEvent", "signout");
+                UnitySendMessage("GameManager", "KakaoEvent", "signout success");
             }
         }];
     }
@@ -87,12 +70,32 @@ extern "C" {
         [KOSessionTask unlinkTaskWithCompletionHandler:^(BOOL success, NSError *error) {
             if(error){
                 NSLog(@"unlink logout. - error: %@", error);
-                UnitySendMessage("GameManager", "KakaoError", "unlink");
+                UnitySendMessage("GameManager", "KakaoError", "unlink fail");
             }
             else {
                 NSLog(@"unlink succeeded.");
-                UnitySendMessage("GameManager", "KakaoEvent", "unlink");
+                UnitySendMessage("GameManager", "KakaoEvent", "unlink success");
             }
+        }];
+    }
+
+    void _KakaoGetToken()
+    {
+        [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
+                if (error) {
+                    switch (error.code) {
+                        case KOErrorDeactivatedSession:
+                            NSLog(@"세션이 만료된(access_token, refresh_token이 모두 만료된 경우) 상태");
+                            break;
+                        default:
+                            NSLog(@"예기치 못한 에러. 서버 에러");
+                            break;
+                    }
+                } else {
+                    // 성공 (토큰이 유효함)
+                    NSLog(@"success request - access token info:  %@", accessTokenInfo);
+                    UnitySendMessage("GameManager", "KakaoToken", accessTokenInfo);
+                }
         }];
     }
 }

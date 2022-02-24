@@ -86,39 +86,11 @@ public class KakaoAuth : MonoBehaviour
 
     private void KakaoEvent(string call)
     {
-        switch(call)
-        {
-            case "signin":
-                infoText.text += "로그인 성공\n";
-                break;
-            case "signout":
-                infoText.text += "로그아웃 성공\n";
-                break;
-            case "unlink":
-                infoText.text += "계정연결해제 성공\n";
-                break;
-            default:
-                infoText.text += "알수없는 이벤트입니다.\n";
-                break;
-        }
+        infoText.text += call+ "\n";
     }
 
     private void KakaoError(string call)
     {
-        switch(call)
-        {
-            case "signin":
-                infoText.text += "로그인 에러 발생\n";
-                break;
-            case "signout":
-                infoText.text += "로그아웃 에러 발생\n";
-                break;
-            case "unlink":
-                infoText.text += "계정연결 해제 에러 발생\n";
-                break;
-            case "userinfo":
-                infoText.text += "사용자 정보 불러오기 에러 발생\n";
-                break;
-        }
+        infoText.text += call + "\n";
     }
 }
