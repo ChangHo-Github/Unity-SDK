@@ -15,10 +15,10 @@ public static class KakaoPostprocess
     static string ProjectPath = string.Empty;
     static string PbxProjectPath = string.Empty;
 
-    [PostProcessBuild(999)]    // 빌드 ???�행?�는 callback func
+    [PostProcessBuild(999)]    // 빌드 후 실행되는 callback func
     public static void OnPostProcessBuild(BuildTarget target, string path)
     {
-        // iOS ?�랫?�일 경우�?
+        // iOS ?뚮옯?쇱씪 寃쎌슦留?
         if (target == BuildTarget.iOS)
         {
             ProjectPath = path;
@@ -41,7 +41,7 @@ public static class KakaoPostprocess
         Debug.Log("KAKAO SDK setup for iOS project");
     }
 
-    // URL Scheme ?�정 추�?
+    // URL Scheme 설정 추가
     static void AddKakaoTalkUrlScheme(PlistDocument plist)
     {
         const string CFBundleURLTypes = "CFBundleURLTypes";
@@ -61,13 +61,13 @@ public static class KakaoPostprocess
         getSocialSchemeElem.values[CFBundleURLSchemes] = getSocialUrlSchemesArray;
     }
 
-    // KAKAO_APP_KEY property 추�?
+    // KAKAO_APP_KEY property 추가
     static void AddKakaoAppKey(PlistDocument plist)
     {
         plist.root.SetString("KAKAO_APP_KEY", KAKAO_APP_KEY);
     }
 
-    // LSApplicationQueriesSchemes property 추�?
+    // LSApplicationQueriesSchemes property 추가
     static void AddApplicationQuerySceheme(PlistDocument plist)
     {
         const string LSApplicationQueriesSchemes = "LSApplicationQueriesSchemes";
@@ -87,7 +87,7 @@ public static class KakaoPostprocess
         kakaoSchemes.ToList().ForEach(appsArray.AddString);
     }
 
-    // 빌드 Linker ?�정 추�?
+    // 빌드 Linker 설정 추가
     static void AddLinkerFlag(PBXProject project)
     {
         project.ReadFromString(File.ReadAllText(PbxProjectPath));
@@ -101,7 +101,7 @@ public static class KakaoPostprocess
 
     #region helpers
 
-    // 빌드 ?�정 변�?helper
+    // 빌드 설정 변경 helper
     static void ModifyProject(Action<PBXProject> modifier)
     {
         try
@@ -119,7 +119,7 @@ public static class KakaoPostprocess
         }
     }
 
-    // Info.plist ?�정 변�?helper
+    // Info.plist 설정 변경 helper
     static void ModifyPlist(Action<PlistDocument> modifier)
     {
         try
