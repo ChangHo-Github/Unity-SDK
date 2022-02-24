@@ -35,7 +35,7 @@ extern "C" {
                 } else {
                     // 성공 (토큰이 유효함)
                     NSLog(@"success request - access token info:  %@", accessTokenInfo);
-                    UnitySendMessage("GameManager", "KakaoToken", accessTokenInfo);
+                    UnitySendMessage("GameManager", "KakaoToken", "\(accessTokenInfo)");
                 }
              }];
 
@@ -76,7 +76,7 @@ extern "C" {
             }
             else
             {
-                NSLog(@"logout success")
+                NSLog(@"logout success");
                 UnitySendMessage("GameManager", "KakaoEvent", "signout");
             }
         }];

@@ -15,16 +15,18 @@ public static class KakaoPostprocess
     static string ProjectPath = string.Empty;
     static string PbxProjectPath = string.Empty;
 
-    [PostProcessBuild(999)]    // ∫ÙµÂ »ƒ Ω««‡µ«¥¬ callback func
+    [PostProcessBuild(999)]    // ÎπåÎìú ÌõÑ Ïã§ÌñâÎêòÎäî callback func
     public static void OnPostProcessBuild(BuildTarget target, string path)
     {
-        // iOS «√∑ß∆˚¿œ ∞ÊøÏ∏∏
+        // iOS ÌîåÎû´ÌèºÏùº Í≤ΩÏö∞Îßå
         if (target == BuildTarget.iOS)
         {
             ProjectPath = path;
             PbxProjectPath = PBXProject.GetPBXProjectPath(path);
 
             PostProcessIosProject();
+
+            PlayerSettings.iOS.allowHTTPDownload = true;
         }
     }
 
@@ -39,7 +41,7 @@ public static class KakaoPostprocess
         Debug.Log("KAKAO SDK setup for iOS project");
     }
 
-    // URL Scheme º≥¡§ √ﬂ∞°
+    // URL Scheme ÏÑ§Ï†ï Ï∂îÍ∞Ä
     static void AddKakaoTalkUrlScheme(PlistDocument plist)
     {
         const string CFBundleURLTypes = "CFBundleURLTypes";
@@ -59,13 +61,13 @@ public static class KakaoPostprocess
         getSocialSchemeElem.values[CFBundleURLSchemes] = getSocialUrlSchemesArray;
     }
 
-    // KAKAO_APP_KEY property √ﬂ∞°
+    // KAKAO_APP_KEY property Ï∂îÍ∞Ä
     static void AddKakaoAppKey(PlistDocument plist)
     {
         plist.root.SetString("KAKAO_APP_KEY", KAKAO_APP_KEY);
     }
 
-    // LSApplicationQueriesSchemes property √ﬂ∞°
+    // LSApplicationQueriesSchemes property Ï∂îÍ∞Ä
     static void AddApplicationQuerySceheme(PlistDocument plist)
     {
         const string LSApplicationQueriesSchemes = "LSApplicationQueriesSchemes";
@@ -85,7 +87,7 @@ public static class KakaoPostprocess
         kakaoSchemes.ToList().ForEach(appsArray.AddString);
     }
 
-    // ∫ÙµÂ Linker º≥¡§ √ﬂ∞°
+    // ÎπåÎìú Linker ÏÑ§Ï†ï Ï∂îÍ∞Ä
     static void AddLinkerFlag(PBXProject project)
     {
         project.ReadFromString(File.ReadAllText(PbxProjectPath));
@@ -99,7 +101,7 @@ public static class KakaoPostprocess
 
     #region helpers
 
-    // ∫ÙµÂ º≥¡§ ∫Ø∞Ê helper
+    // ÎπåÎìú ÏÑ§Ï†ï Î≥ÄÍ≤Ω helper
     static void ModifyProject(Action<PBXProject> modifier)
     {
         try
@@ -117,7 +119,7 @@ public static class KakaoPostprocess
         }
     }
 
-    // Info.plist º≥¡§ ∫Ø∞Ê helper
+    // Info.plist ÏÑ§Ï†ï Î≥ÄÍ≤Ω helper
     static void ModifyPlist(Action<PlistDocument> modifier)
     {
         try

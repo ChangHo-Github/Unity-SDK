@@ -16,7 +16,6 @@ public class KakaoAuth : MonoBehaviour
     [DllImport("__Internal")]
     static extern void _KakaoUnlink();
 
-
     public void KakaoSignIn()
     {
         infoText.text += "KakaoSignIn\n";
