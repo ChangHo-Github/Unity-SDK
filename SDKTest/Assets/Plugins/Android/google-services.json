@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "164116676290",
+    "project_id": "publicar-aed77",
+    "storage_bucket": "publicar-aed77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164116676290:android:6f170e57bbe3c411ef055b",
+        "android_client_info": {
+          "package_name": "com.phantom.practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164116676290-gfvtvp8eoe343cghp49to6piqdudg4ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ0b6WmKgUeyCgQa1MlVGn-HMrNKoZm6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164116676290-gfvtvp8eoe343cghp49to6piqdudg4ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
